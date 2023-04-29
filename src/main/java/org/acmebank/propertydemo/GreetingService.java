@@ -8,7 +8,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 public class GreetingService {
 
     // just use a random property for a demo
-    @ConfigProperty(name = "greeting", defaultValue = "Hello jaguar")
+    @ConfigProperty(name = "greeting", defaultValue = "Hello")
     String greeting; 
 
     public String greeting(String name) {
