@@ -1,0 +1,83 @@
+package org.acmebank.config;
+
+import java.time.Duration;
+
+import io.quarkus.runtime.annotations.ConfigPhase;
+import io.quarkus.runtime.annotations.ConfigRoot;
+import io.quarkus.runtime.configuration.DurationConverter;
+import io.smallrye.config.ConfigMapping;
+import io.smallrye.config.WithConverter;
+import io.smallrye.config.WithDefault;
+import io.smallrye.config.WithName;
+
+/**
+ * We don't really use this, because these are configurations for the config itself, so it causes a chicken / egg
+ * problem, but we have it so the configurations can be properly documented.
+ * <br>
+ * The config itself is loaded using the ConfigSourceContext on the ConfigSourceFactory
+ */
+@ConfigMapping(prefix = "rftm.properties.jdbc")
+@ConfigRoot(phase = ConfigPhase.BUILD_AND_RUN_TIME_FIXED)
+public interface DatabaseConfigConfig {
+
+    @WithDefault("general")
+    String applicationName();
+    
+    /**
+     * If set to true, the application will attempt to look up the configuration from DB
+     */
+    @WithDefault("true")
+    boolean enabled();
+
+    /**
+     * If set to true, the application will cache all looked up the configuration from DB in memory
+     * If set to false, the application will always get the latest values from the DB
+     */
+    @WithDefault("true")
+    boolean cache();
+
+    /**
+     * The datasource username, if not defined the username of the default datasource is used
+     */
+    @WithDefault("${quarkus.datasource.username}")
+    String username();
+
+    /**
+     * The datasource password, if not defined the password of the default datasource is used
+     */
+    @WithDefault("${quarkus.datasource.password}")
+    String password();
+
+    /**
+     * The datasource URL, if not defined the URL of the default datasource is used
+     */
+    @WithDefault("${quarkus.datasource.jdbc.url}")
+    String url();
+
+    /**
+     * The initial size of the pool. Usually you will want to set the initial size to match at least the
+     * minimal size, but this is not enforced so to allow for architectures which prefer a lazy initialization
+     * of the connections on boot, while being able to sustain a minimal pool size after boot.
+     */
+    @WithDefault("0")
+    int initialSize();
+
+    /**
+     * The datasource pool minimum size
+     */
+    @WithDefault("0")
+    int minSize();
+
+    /**
+     * The datasource pool maximum size
+     */
+    @WithDefault("5")
+    int maxSize();
+
+    /**
+     * The timeout before cancelling the acquisition of a new connection
+     */
+    @WithDefault("5")
+    @WithConverter(DurationConverter.class)
+    Duration acquisitionTimeout();
+}
