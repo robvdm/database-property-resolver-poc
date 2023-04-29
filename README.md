@@ -1,6 +1,6 @@
 # Quarkus database-property-resolver-poc
 
-##Notes
+## Notes
 
 * Quarkus uses SmallRye config for it's configuration:  https://quarkus.io/guides/config-reference https://github.com/smallrye/smallrye-config
 * Config can from multiple sources: config files, environment variables etc. and custom sources like URL's or a Database. Which one will be picked is based on ordinals with a certain weight. No need to merge sources manually.
@@ -10,7 +10,7 @@
 * This PoC is based on it with a different database backend and SQL queries
 * There is no Spring JDBCTemplate equivalent so you need to do some extra JDBC coding but that's minimal (there is a port with this code is so minimal that it's not worth the effort).
 
-##Usage
+## Usage
 
 Configure database in application.properties:
 
