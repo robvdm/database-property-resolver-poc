@@ -2,7 +2,9 @@
 
 ## Notes
 
-* Quarkus uses SmallRye config for it's configuration:  https://quarkus.io/guides/config-reference https://github.com/smallrye/smallrye-config
+* Quarkus uses SmallRye config for it's configuration:
+  - https://quarkus.io/guides/config-reference
+  - https://github.com/smallrye/smallrye-config
 * Config can from multiple sources: config files, environment variables etc. and custom sources like URL's or a Database. Which one will be picked is based on ordinals with a certain weight. No need to merge sources manually.
 * A custom resource has to be registered in META-INF/services/io.smallrye.config.ConfigSourceFactory
 * At config time not everything is available. A config source based on Panache did not work at that stage (which is logical).
