@@ -21,8 +21,7 @@ public class DatabaseConfigSourceFactory implements ConfigSourceFactory.Configur
             return Collections.emptyList();
         }
 
-        try {
-            PropertiesRepository repository = new PropertiesRepository(config);
+        try (PropertiesRepository repository = new PropertiesRepository(config)) {
             if (config.cache()) {
                 return Collections.singletonList(new InMemoryConfigSource("jdbc-config", repository.getAllConfigValues(), 280));
             } else {
